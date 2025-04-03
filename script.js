@@ -2,26 +2,27 @@ document.addEventListener("DOMContentLoaded", () => {
     const entradaTarea = document.getElementById("taskInput");
     const cuerpoTablaTareas = document.getElementById("taskTableBody");
     const botonEliminarCompletadas = document.getElementById("eliminarCompletadas");
-    let tareas = JSON.parse(localStorage.getItem("tareas")) || [];
+    let tareas = localStorage.getItem("tareas") ? JSON.parse(localStorage.getItem("tareas")) : [];
 
     function renderizarTareas() {
-        cuerpoTablaTareas.innerHTML = "";
-        tareas.forEach((tarea, indice) => {
-            const fila = document.createElement("tr");
-            fila.innerHTML = `
-                <td>${indice + 1}</td>
-                <td>${tarea.nombre}</td>
-                <td><input type="checkbox" ${tarea.completada ? 'checked' : ''} data-index="${indice}" onchange="alternarTarea(${indice})"></td>
-                <td><input type="checkbox" data-index="${indice}" onclick="eliminarTarea(${indice})" class="btn btn-danger"></td>
+        let contenidoHTML = "";
+        for (let i = 0; i < tareas.length; i++) {
+            contenidoHTML += `
+                <tr>
+                    <td>${i + 1}</td>
+                    <td>${tareas[i].nombre}</td>
+                    <td><input type="checkbox" ${tareas[i].completada ? 'checked' : ''} onchange="alternarTarea(${i})"></td>
+                    <td><button onclick="eliminarTarea(${i})" class="btn btn-danger">X</button></td>
+                </tr>
             `;
-            cuerpoTablaTareas.appendChild(fila);
-        });
+        }
+        cuerpoTablaTareas.innerHTML = contenidoHTML;
         localStorage.setItem("tareas", JSON.stringify(tareas));
     }
 
     function agregarTarea() {
         const nombreTarea = entradaTarea.value.trim();
-        if (nombreTarea) {
+        if (nombreTarea !== "") {
             tareas.push({ nombre: nombreTarea, completada: false });
             entradaTarea.value = "";
             renderizarTareas();
@@ -43,7 +44,7 @@ document.addEventListener("DOMContentLoaded", () => {
         renderizarTareas();
     }
 
-    botonEliminarCompletadas.addEventListener("click", eliminarTareasCompletadas);
+    botonEliminarCompletadas.onclick = eliminarTareasCompletadas;
 
     renderizarTareas();
     window.agregarTarea = agregarTarea;
