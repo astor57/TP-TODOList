@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
         tareas = [];
     }
 
-    function renderizarTareas() {
+    function muestraTareas() {
         let contenidoHTML = "";
         for (let i = 0; i < tareas.length; i++) {
             contenidoHTML += `
@@ -33,7 +33,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (nombreTarea !== "") {
             tareas.push({ nombre: nombreTarea, completada: false });
             entradaTarea.value = "";
-            renderizarTareas();
+            muestraTareas();
         }
     }
 
@@ -41,24 +41,24 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function alternarTarea(indice) {
         tareas[indice].completada = !tareas[indice].completada;
-        renderizarTareas();
+        muestraTareas();
     }
 
     function eliminarTarea(indice) {
         //en el array tareas elimina 1 elemento a partir de x posición (indice en este caso)
         tareas.splice(indice, 1);
-        renderizarTareas();
+        muestraTareas();
     }
     
     function eliminarTareasCompletadas() {
         //filter hace que en el array tareas se elimine todas las que tienen tarea.completada === true y nos da un nuevo array solo con las no completadas
         tareas = tareas.filter(tarea => !tarea.completada);
-        renderizarTareas();
+        muestraTareas();
     }
 
     botonEliminarCompletadas.onclick = eliminarTareasCompletadas;
 
-    renderizarTareas();
+    muestraTareas();
     window.alternarTarea = alternarTarea;
     window.eliminarTarea = eliminarTarea;
     window.eliminarTareasCompletadas = eliminarTareasCompletadas;
