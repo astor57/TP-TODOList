@@ -11,7 +11,7 @@
         <h2 class="text-center">Lista de Tareas</h2>
         <div class="mb-3 d-flex">
             <input type="text" id="taskInput" class="form-control me-2" placeholder="Agregar nueva tarea">
-            <button class="btn btn-primary" onclick="agregarTarea()">Agregar</button>
+            <button id="botonAgregar" class="btn btn-primary" onclick="agregarTarea()">Agregar</button>
         </div>
         <table class="table table-striped">
             <thead>
@@ -23,7 +23,7 @@
                 </tr>
             </thead>
             <tbody id="taskTableBody">
-                <!-- Las tareas se insertarán aquí -->
+                <!-- Acá van las tareas -->
             </tbody>
         </table>
         <button id="eliminarCompletadas" class="btn btn-danger">Eliminar tareas completadas</button>
