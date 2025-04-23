@@ -65,30 +65,20 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     function mostrarTareaMasRapida() {
-        const tareasCompletadas = tareas.filter(t => t.completada && t.fechaCreacion && t.fechaCompletado);
-        let tareaMasRapida;
-        let tiempoMinimo;
-
-        if (tareasCompletadas.length === 0) {
-            document.getElementById("tareaMasRapida").innerText = "No hay tareas completadas.";
-            return;
-        }
-    
-        tareaMasRapida = tareasCompletadas[0];
-        tiempoMinimo = new Date(tareaMasRapida.fechaCompletado) - new Date(tareaMasRapida.fechaCreacion);
-    
-        for (let i = 1; i < tareasCompletadas.length; i++) {
-            let tarea = tareasCompletadas[i];
-            let tiempo = new Date(tarea.fechaCompletado) - new Date(tarea.fechaCreacion);
-    
-            if (tiempo < tiempoMinimo) {
-                tiempoMinimo = tiempo;
-                tareaMasRapida = tarea;
+        const tareasCompletadas = tareas.filter(t => t.completada && t.completadaEn);
+            if (tareasCompletadas.length === 0) {
+                mostrarTareaMasRapida.textContent = "No hay tareas aún.";
+                return;
             }
-        }
-    
-        document.getElementById("tareaMasRapida").innerText = `Tarea más rápida: "${tareaMasRapida.nombre}"`;    
-        }
+
+            let masRapida = tareasCompletadas.reduce((masRapida, t) => {
+                const tiempo = new Date(t.completadaEn) - new Date(t.creadaEn);
+                return tiempo < masRapida.tiempo ? { tarea: t, tiempo } : masRapida;
+            }, { tarea: null, tiempo: Infinity });
+
+            const segundos = (masRapida.tiempo / 1000).toFixed(2);
+            document.getElementById(tareaMasRapida).innerHTML = `Tarea completada más rápido: "${masRapida.tarea.texto}" en ${segundos} segundos.`;   
+    }
     
 
     function eliminarTarea(indice) {
