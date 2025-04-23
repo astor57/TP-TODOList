@@ -22,7 +22,16 @@
                     <th>Completada</th>
                     <th>Eliminar</th>
                 </tr>
-            </thead>
+            </thead>            
+            <div class="mb-3">
+                <label for="filtroTareas" class="form-label">Filtrar tareas:</label>
+                <select id="filtroTareas" class="form-select">
+                    <option value="todas">Todas</option>
+                    <option value="completadas">Completadas</option>
+                    <option value="pendientes">Pendientes</option>
+                </select>
+            </div>
+            <div id="tareaMasRapida" class="mt-3 fw-bold"></div>
             <tbody id="taskTableBody">
                 <!-- Acá van las tareas -->
             </tbody>
