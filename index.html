@@ -25,19 +25,18 @@
             </thead>            
             <div class="mb-3">
                 <label for="filtroTareas" class="form-label">Filtrar tareas:</label>
-                <select id="filtroTareas" class="form-select">
+                <select id="filtroTareas" class="form-select w-auto d-inline-block">
                     <option value="todas">Todas</option>
                     <option value="completadas">Completadas</option>
                     <option value="pendientes">Pendientes</option>
                 </select>
             </div>
-            <p id="tareaMasRapida">Tarea más rapida</p>
-            <tbody id="taskTableBody">
-                <!-- Acá van las tareas -->
-            </tbody>
-        </table>
-        <button id="eliminarCompletadas" class="btn btn-danger">Eliminar tareas completadas</button>
-    </div>
+            
+            <tbody id="taskTableBody"></tbody>
+            <button id="eliminarCompletadas" class="btn btn-danger mb-3">Eliminar Completadas</button>
+    
+            <p id="tareaMasRapida" class="fw-bold">Tarea más rápida: -</p>
+        </div>
     <script src="script.js"></script>
 </body>
 </html>
